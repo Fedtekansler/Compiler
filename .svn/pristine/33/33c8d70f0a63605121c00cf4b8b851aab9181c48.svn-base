@@ -1,0 +1,2 @@
+/* minimal test: a top level procedure call */
+print(".")

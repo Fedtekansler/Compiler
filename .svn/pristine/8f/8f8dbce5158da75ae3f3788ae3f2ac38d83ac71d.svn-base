@@ -1,0 +1,7 @@
+/* string comparison using static link */
+let
+    var s := "whatever"
+    function compare(): int = s > "else"
+in
+    compare()
+end

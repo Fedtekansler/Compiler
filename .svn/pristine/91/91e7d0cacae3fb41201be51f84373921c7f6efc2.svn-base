@@ -1,0 +1,2 @@
+../testcases/test35.tig:5.5:Actual parameter type differs from formal parameter type, expected: STRING, received: INT
+../testcases/test35.tig:5.5:Argument lists are of different lengths

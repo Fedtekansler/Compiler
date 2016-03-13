@@ -1,0 +1,1 @@
+../testcases/test32.tig:4.14:Array type and init expression type don't agree, expected: INT, received: STRING

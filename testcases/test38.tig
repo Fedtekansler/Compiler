@@ -1,0 +1,9 @@
+/* this is illegal: there are two types with the same name
+ * in the same (consecutive) batch of mutually recursive types;
+ * see also test47.tig */
+let
+    type a = int
+    type a = string
+in
+    0
+end

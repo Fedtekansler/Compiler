@@ -1,0 +1,2 @@
+/* minimal test: function call in sequence */
+(0; getchar())

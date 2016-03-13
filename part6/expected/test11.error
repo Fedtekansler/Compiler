@@ -1,0 +1,2 @@
+../testcases/test11.tig:2.23:variable must not be assigned to
+../testcases/test11.tig:2.1:INT requiredwhen checking 'hi' in ForExp, STRING provided

@@ -1,0 +1,10 @@
+/* an array type and an array variable; test01 with chk & output */
+let
+    type arrtype = array of int
+    var arr1: arrtype := arrtype [10] of 1
+in
+    if (arr1[5] = 1)
+    then print("SUCCESS")
+    else print("FAIL")
+end
+

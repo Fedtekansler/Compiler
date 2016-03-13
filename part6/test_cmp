@@ -1,0 +1,15 @@
+#!/bin/bash --norc
+
+# make sa
+
+grep ' -- compile only: [^<]' filesrunning |\
+while read -r n; do
+    n=${n:2:-1}
+    n=${n%% --*}
+    if ./tigerc $n; then
+        echo "--- OK(cmp): $n"
+    else
+        echo "--- FAILED(cmp): $n (during compilation)"
+    fi
+done
+

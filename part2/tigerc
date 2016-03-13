@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# very naive script: must run from source directory, expects Tiger source
+# in ../testcases/..; tigerc.x86-linux should scan and print tokens
+
+if [ "$#" -ne "1" ]; then
+    echo "Usage: $0 <testname>"
+    exit 1
+fi
+
+sml @SMLload=tigerc.x86-linux "../testcases/$1.tig"
+
+if [ "$?" -ne 0 ]; then
+    exit 1
+fi
+

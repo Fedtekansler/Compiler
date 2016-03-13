@@ -1,0 +1,47 @@
+#!/bin/bash --norc
+
+# very naive script: must run from source directory, expects Tiger source
+# in $TEST_DIR, will put generated code into $OUT_DIR
+# Note that as/gcc will be skipped if the environment variable TIGERC_NOAS 
+# is set to a non-empty value; this is used by 'compiletests' to produce
+# the assembly source code, but not an executable file
+
+TEST_DIR=../testcases
+OUT_DIR=./out
+
+if [ "$#" -ne "1" ]; then
+    echo "Usage: $0 <testname>"
+    exit 1
+fi
+
+if [ ! -e $OUT_DIR ]; then
+    mkdir $OUT_DIR
+fi
+
+if [ ! -e "$TEST_DIR/$1.tig" ]; then
+    echo "No such file: $TEST_DIR/$1.tig"
+    exit 1
+fi
+
+sml @SMLload=tigerc.x86-linux "$TEST_DIR/$1.tig" "$OUT_DIR/$1.s"
+
+if [ "$?" -ne 0 ]; then
+    exit 1
+fi
+
+if [ ! "$TIGERC_NOAS" = "" ]; then
+    # skip as/gcc
+    exit 0
+fi
+
+pushd $OUT_DIR >/dev/null
+for n in $@; do
+    if [ -e $n.s ]; then
+        as -g -o $n.o $n.s
+        gcc -g -static -o $n.bin ../runtime.o $n.o
+    else
+        echo "Not assembling $n"
+    fi
+done
+popd >/dev/null
+

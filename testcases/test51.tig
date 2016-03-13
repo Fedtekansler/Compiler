@@ -1,0 +1,8 @@
+/* variant of test03.tig that uses a non-zero offset */
+let
+    type rectype = {age: int, name: string}
+    var rec1: rectype := rectype{age=1000, name="Nobody"}
+in
+    rec1.name := "Somebody";
+    rec1
+end

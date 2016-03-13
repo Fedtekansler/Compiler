@@ -1,0 +1,6 @@
+/* semicolon in initializer */
+let 
+    var x := (0; getchar())
+in
+    0
+end

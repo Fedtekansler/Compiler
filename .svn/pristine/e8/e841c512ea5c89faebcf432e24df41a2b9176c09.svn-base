@@ -1,0 +1,2 @@
+../testcases/test23.tig:6.5:Variable and expression in assign expression not equal. Var: STRING, Exp: INT
+../testcases/test23.tig:7.5:Variable and expression in assign expression not equal. Var: INT, Exp: STRING

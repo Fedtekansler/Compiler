@@ -1,0 +1,9 @@
+/* testing for /* nested */ comments /* derp nesting /* damn */ */ */
+
+let
+	var derp := "PETEEEEER! DU ER EN FISK \n"
+in
+	if 2
+	then 1
+	else 0
+end

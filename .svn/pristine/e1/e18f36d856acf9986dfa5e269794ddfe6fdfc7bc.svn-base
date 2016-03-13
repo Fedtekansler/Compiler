@@ -1,0 +1,65 @@
+#!/bin/bash --norc
+
+OUTDIR=out
+
+if [ ! -e "$OUTDIR" ]; then
+    mkdir "$OUTDIR"
+fi
+
+failformat () {
+    echo "--- FAILED(run): $1 (unknown format)"
+}
+
+isdigit () {
+    if [ "$#" -ne "1" ]; then return 1; fi
+    case "$1" in
+        *[^0-9]*|"") return 1;;
+        *) return 0;;
+    esac
+}
+
+# iterate over every line in 'filesrunning' except comments and empty lines
+cat filesrunning |\
+grep -ve '^#' |\
+grep -Pve '^[ \t]*$' |\
+while read -r n; do
+    test="${n%%,*}"
+    result="${n##*,}"
+    result1=${result:0:1}
+    if ./tigerc2 $test; then
+        # we generally trust the format of the line from 'filesrunning'
+        # to be correct --- the following tests are _very_ easy to cheat
+        if [ "$result1" = '"' ]; then
+            # format <test>,"some string": check for specified output
+            expected="${result:1:-1}"
+            output="$($OUTDIR/$test.bin)"
+            if [ "$output" = "$expected" ]; then
+                echo "--- OK(run): $test"
+            else
+                echo "--- FAILED(run): $test (output: '$output')"
+            fi
+        else
+            $OUTDIR/$test.bin
+            exitval=$?
+            if isdigit "$result1"; then
+                # format <test>,<number>: check exit value is <number>
+                if [ "$result" -eq "$exitval" ]; then
+                    echo "--- OK(run): $test"
+                else
+                    echo "--- FAILED(run): $test (exit value: $exitval)"
+                fi
+            elif [ "$result" = "" -o \
+	           "$result1" = " " -o \
+                   "$result1" = "	" ]; then
+                # format <test>,: just run, user will see SEGV etc.
+                echo "--- OK(run): $test"
+            else
+                # format unknown: 'filesrunning' must be corrected
+                failformat "$test"
+            fi
+        fi
+    else
+        echo "--- FAILED(run): $test (during compilation)"
+    fi
+done
+

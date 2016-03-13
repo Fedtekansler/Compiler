@@ -1,0 +1,21 @@
+#!/bin/bash --norc
+
+# very naive script: must run from source directory, expects Tiger source
+# in $TEST_DIR, will put generated code into $OUT_DIR
+
+TEST_DIR=../testcases
+OUT_DIR=./out
+
+if [ "$#" -ne "1" ]; then
+    echo "Usage: $0 <testname>"
+fi
+
+if [ ! -e $OUT_DIR ]; then
+    mkdir $OUT_DIR
+fi
+
+sml @SMLload=tigerc.x86-linux "$TEST_DIR/$1.tig" "$OUT_DIR/$1.frag"
+
+if [ "$?" -ne 0 ]; then
+    exit 1
+fi

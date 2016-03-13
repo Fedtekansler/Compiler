@@ -1,0 +1,2 @@
+../testcases/test33.tig:3.14:Declared type doesn't exist in type environment: rectype
+../testcases/test33.tig:3.14:Expected record type, received: ERROR

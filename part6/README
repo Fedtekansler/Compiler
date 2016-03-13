@@ -1,0 +1,7 @@
+
+Note that the book says argregs et al. are not public, but since we have
+codegen in a separate file x86gen.sml they have to be available somehow
+over there.
+
+This must be mentioned in handin6.html!
+

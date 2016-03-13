@@ -1,0 +1,6 @@
+/* error: the init value does not have the declared type */
+let 
+    var a: int := " "
+in
+    a
+end

@@ -1,0 +1,55 @@
+# Specification of how to run each test case in 'test_run', and
+# what to check.  Format of each line in this file:
+#   '#...': comment line, ignored (exception used by 'test_cmp' below)
+#   '<test>,<number>': run this test, check that the exit value is <number>
+#   '<test>,': run this test, ignoring the exit value
+#   '<test>,"<output>"': run this test, check output is <output>
+#   '# <test> -- compile only: <reason>': tested by 'test_cmp'
+# NB: very simplistic parsing applied, no extra whitespace allowed
+test01,
+test02,
+test03,
+test04,0
+test05,
+# test06 -- compile only: infinite loop
+# test07 -- compile only: infinite loop
+test08,40
+test12,
+test27,2
+test30,0
+test37,
+test41,0
+test42,
+test44,
+test46,0
+test47,0
+test48,0
+test51,
+test52,
+test53,42
+test54,4
+test55,9
+test56,9
+test57,3
+test58,"."
+test59,1
+test60,1
+test61,1
+test62,1
+test63,1
+test64,1
+test65,1
+test66,1
+test67,1
+test68,
+test69,48
+# test70 -- compile only: requires input
+# test71 -- compile only: requires input
+# test72 -- skip: test manually
+test73,"OK."
+test74,24
+test75,1
+test76,"abcdefghijklmnopqrstuvwxyz0123456789"
+# test77 -- skip: test manually
+# merge -- skip: test manually
+# queens -- skip: test manually

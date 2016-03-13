@@ -1,0 +1,7 @@
+../testcases/test28.tig:6.15:Constraint type and expression type mismatch: different record types, expected: RECORD
+  name: STRING
+  id: INT
+END, received: RECORD
+  name: STRING
+  id: INT
+END

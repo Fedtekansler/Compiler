@@ -1,0 +1,94 @@
+/* many logical tests */
+let
+    type bool = int
+    var true := 1
+    var false := 0
+
+    function chk(a: bool, b: bool, msg: string) =
+        if a = b then print(msg) else print(".")
+
+    function fill(first: string) = (
+        for i := ord("a") to ord("z") do
+            if ord("a") <= ord(first) & ord(first) <= i & i <= ord("z")
+            then print(chr(i));
+        for i := ord("0") to ord("9") do
+            if ord("0") <= ord(first) & ord(first) <= i & i <= ord("9") |
+               ord("a") <= ord(first)
+            then print(chr(i)))
+
+    function newl() = print(chr(10))
+
+    function TstBool() =
+        let
+            var B1: bool := false
+            var B2: bool := false
+            var B3: bool := false
+            var a: int := 0
+            var b: int := 0
+            function XT(): bool = true
+            function XF(): bool = false
+            function Q(): bool = (a=b)
+            function F(b1: bool, b2: bool, ch: string) =
+                let 
+                    var R1: bool := false
+                    var bo1: bool := false
+                    var bo2: bool := false
+                    function FF(b: bool): bool = b
+                in  
+                    R1 := FF(b1) & FF(b2);
+                    bo1 := FF(b1); 
+                    bo2 := FF(b2);
+                    chk(R1,(bo1 & bo2),ch)
+                end
+        in
+            B1 := false;
+            B2 := true;
+            if B1 then print(".") else print("a");
+            if B2 then print("b") else print(".");
+            B3 := B1 | B2; 
+            chk(B3,              true, "c");
+            B3 := B1 & B2; 
+            chk(B3,             false, "d");
+            B3 := not(B2);
+            chk(B3,             false, "e");
+            chk(false | XT(),    true, "f");
+            chk(true & XT(),     true, "g");
+            chk(XT() | false,    true, "h");
+            chk(XT() & true,     true, "i");
+            chk(B1 | XT(),       true, "j");
+            chk(XT() | B1,       true, "k");
+            chk(B2 & XT(),       true, "l");
+            chk(B1 & XT(),      false, "m");
+            a := 111;
+            b := 222;
+            chk(not(a=b),        true, "n");
+            chk(not(Q()),        true, "o");
+            chk(not(XT()),      false, "p");
+            F(true,              true, "q");
+            F(true,             false, "r");
+            F(false,             true, "s");
+            F(false,            false, "t");
+            chk(false <> false, false, "u"); /* NB: <> is 'xor' */
+            chk(false <> true,   true, "v");
+            B1 := false;
+            chk(B1 <> true,      true, "w");
+            chk(B1 <> false,    false, "x");
+            B1 := true;
+            chk(false <> B1,     true, "y");
+            chk(XF() <> XT(),    true, "z");
+            B1 := true;
+            B2 := false;
+            chk(false | B1,      true, "0");
+            chk(false | B2,     false, "1");
+            chk(false | false,  false, "2");
+            chk(false | true,    true, "3");
+            chk(true | B1,       true, "4");
+            chk(false & B1,     false, "5");
+            chk(true & B1,       true, "6");
+            chk(true & B2,      false, "7");
+            chk(true & false,   false, "8");
+            chk(true & true,     true, "9")
+        end
+in
+    TstBool()
+end

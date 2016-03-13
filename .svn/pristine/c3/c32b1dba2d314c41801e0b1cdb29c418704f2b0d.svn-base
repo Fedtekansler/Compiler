@@ -1,0 +1,10 @@
+/* isdigit, without argument but using static link */
+let
+    var buffer := "5"
+
+    function isdigit(): int = 
+        ord(buffer)>=ord("0") & ord(buffer)<=ord("9")
+in
+    isdigit()
+end
+

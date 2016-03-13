@@ -1,0 +1,2 @@
+/* logical expression involving external calls */
+ord("1") >= ord("0")

@@ -1,0 +1,7 @@
+#!/bin/bash --norc
+
+for n in ../testcases/*.tig; do
+    fname=${n##../testcases/}
+    ./tigerc ${fname%%.tig}
+done
+

@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# run the compiler and then the debugger on a test;
+# very naive script: must run from directory ch9/appel
+
+if [ "$#" -ne "1" ]; then
+  echo "Usage: $0 <testname>"
+  exit 1
+fi
+
+./tigerc $1
+
+pushd out
+gdb -x ../.tigercdb.gdbinit $1.bin
+popd
+

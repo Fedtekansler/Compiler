@@ -1,0 +1,9 @@
+/* this is illegal: there are two functions with the same name
+ * in the same (consecutive) batch of mutually recursive functions;
+ * see also test48.tig */
+let
+    function g(a: int): int = a
+    function g(a: int): int = a
+in
+    0
+end

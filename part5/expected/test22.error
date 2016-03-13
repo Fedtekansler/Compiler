@@ -1,0 +1,5 @@
+../testcases/test22.tig:6.5:Id doesn't exist in record type: nam, in: RECORD
+  name: STRING
+  id: INT
+END
+../testcases/test22.tig:6.5:Variable and expression in assign expression not equal. Var: ERROR, Exp: STRING

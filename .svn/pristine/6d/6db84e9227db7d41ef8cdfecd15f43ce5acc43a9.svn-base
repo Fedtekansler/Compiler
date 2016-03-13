@@ -1,0 +1,6 @@
+/* error: using non-array as an array */
+let 
+    var d := 0
+in
+    d[3]
+end

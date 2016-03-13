@@ -1,0 +1,3 @@
+../testcases/test49.tig:5.22:syntax error: inserting  PLUS
+../testcases/test49.tig:5.14:undefined variable rectype
+../testcases/test49.tig:5.22:Operator used on incompatible types: INT, NIL

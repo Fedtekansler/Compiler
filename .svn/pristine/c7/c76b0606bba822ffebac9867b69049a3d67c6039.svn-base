@@ -1,0 +1,2 @@
+/* minimal test: right-leaning multiplication */
+4 * (3 * 2)

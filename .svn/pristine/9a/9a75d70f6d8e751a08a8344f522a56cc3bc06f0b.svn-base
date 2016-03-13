@@ -1,0 +1,2 @@
+../testcases/test21.tig:5.33:Operator used on incompatible types: INT, UNIT
+../testcases/test21.tig:4.5:Procedure result type different from UNIT, expected: UNIT, received: INT

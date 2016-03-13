@@ -1,0 +1,8 @@
+/* isdigit */
+let
+    function isdigit(s: string): int =
+        ord(s) >= ord("0") & ord(s) <= ord("9")
+in
+    isdigit("1")
+end
+

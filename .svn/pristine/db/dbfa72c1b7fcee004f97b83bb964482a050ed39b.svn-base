@@ -1,0 +1,33 @@
+#!/bin/bash --norc
+
+TEST_DIR=../testcases
+OUT_DIR=out
+EXPECT_DIR=expected
+
+if [ ! -e "$OUT_DIR" ]; then
+    mkdir "$OUT_DIR"
+fi
+
+echo "## Testing succeeding files ##"
+
+for n in `cat filessucceeding`; do
+    ./tigerc $n
+    echo "----- $n -----"
+    diff {$EXPECT_DIR,$OUT_DIR}/$n.frag
+    read -n 1 -s
+done
+
+echo "## Testing failing files ##"
+
+for n in `cat filesfailing`; do
+    ./tigerc $n >$OUT_DIR/$n.error
+    if [ "$?" -ne "0" ]; then
+        echo "----- $n -----"
+        diff {$EXPECT_DIR,$OUT_DIR}/$n.error
+    else
+        echo "----- $n -----"
+        echo "*** ERROR NOT DETECTED ***"
+    fi
+    read -n 1 -s
+done
+

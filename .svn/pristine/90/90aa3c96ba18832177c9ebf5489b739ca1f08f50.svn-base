@@ -1,0 +1,6 @@
+/* define a function */
+let
+    function f(n: int): int = 42
+in
+    f(10)
+end

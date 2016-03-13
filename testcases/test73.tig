@@ -1,0 +1,8 @@
+/* chk */
+let
+    function chk(a: int, b: int, msg: string) =
+        if a = b then print(msg) else print(".")
+in
+    chk(1,1,"OK");      /* prints "OK" */
+    chk(0,1,"Not OK")   /* prints "." */
+end

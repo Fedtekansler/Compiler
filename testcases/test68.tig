@@ -1,0 +1,7 @@
+/* minimal test: variable-to-variable assignment */
+let
+    var x: int := 1
+    var y: int := 2
+in
+    x := y
+end

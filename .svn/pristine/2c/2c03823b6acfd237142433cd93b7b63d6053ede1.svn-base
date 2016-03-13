@@ -1,0 +1,261 @@
+/* many arithmetic tests */
+let
+    function chk(a: int, b: int, msg: string) =
+        if a = b then print(msg) else print(".")
+
+    function fill(first: string) = (
+        for i := ord("a") to ord("z") do
+            if ord("a") <= ord(first) & ord(first) <= i & i <= ord("z")
+            then print(chr(i));
+        for i := ord("0") to ord("9") do
+            if ord("0") <= ord(first) & ord(first) <= i & i <= ord("9") |
+               ord("a") <= ord(first)
+            then print(chr(i)))
+
+    function newl() = print(chr(10))
+
+    function mod(a: int, b: int): int =
+        let 
+            function mod_pos(a: int, b: int): int = /* a>=0, b>0 */
+                (while a >= b do a := a-b; a)
+            function mod_neg(a: int, b: int): int = /* a<=0, b>0 */
+                (while a < 0 do a := a+b; a)
+        in  
+            if b > 0 then
+                if a >= 0 then mod_pos(a,b) else mod_neg(a,b)
+            else if b < 0 then
+                if a >= 0 then -mod_neg(-a,-b) else -mod_pos(-a,-b)
+            else /* b = 0 */ (print("Error: mod (_,0) "); chr(-1); 0)
+        end
+
+    function TstArith() =
+        let 
+            function XX(): int = 999
+            var a: int := 5
+            var b: int := 12
+            var c: int := 2
+            var ch: string := " "
+        in
+            chk(            111+222,   333, "a");
+            chk(              111+a,   116, "b");
+            chk(                a+b,    17, "c");
+            chk(            (a+b)+c,    19, "d");
+            chk(              b+222,   234, "e");
+            chk(            a+(b+c),    19, "f");
+            chk(             XX()+1,  1000, "g");
+            chk(             2+XX(),  1001, "h");
+            chk(             XX()+a,  1004, "i");
+            chk(             b+XX(),  1011, "j");
+            fill("k"); 
+            newl();
+
+            chk(            111-222,  -111, "a");
+            chk(              111-a,   106, "b");
+            chk(                a-b,    -7, "c");
+            chk(            (a-b)-c,    -9, "d");
+            chk(              b-222,  -210, "e");
+            chk(            a-(b-c),    -5, "f");
+            print("ghij"); 
+            fill("k"); 
+            newl();
+
+            chk(                 -3,    -3, "a");
+            chk(                 -a,    -5, "b");
+            chk(             -(a+b),   -17, "c");
+            if -(a+b) = -17 
+            then print("d") 
+            else print(".");
+
+            a := 900; 
+            b := 90; 
+            ch := chr(57);
+            chk(      (a+b)+ord(ch),  1047, "e");
+            chk(      (a+b)-ord(ch),   933, "f");
+            chk(      ord(ch)+(a+b),  1047, "g");
+            chk(      ord(ch)-(a+b),  -933, "h");
+            ch := chr(10);
+            chk(      (a+b)*ord(ch),  9900, "i");
+            chk(      ord(ch)*(a+b),  9900, "j");
+            chk(       1000-ord(ch),   990, "k");
+            ch := chr(200);
+            chk(    ord(ch)+ord(ch),   400, "l");
+            chk(         ord("a")-a,  -803, "m");
+            fill("n");
+            newl();
+
+            a := 5;
+            b := 12;
+            c := 2;
+            chk(                3*a,    15, "a");
+            chk(                a*b,    60, "b");
+            chk(              a*b*c,   120, "c");
+            chk(               12*6,    72, "d");
+            chk(                a*3,    15, "e");
+            chk(            3*(a*b),   180, "f");
+            chk(            (a*b)*3,   180, "g");
+            chk(            a*(b*c),   120, "h");
+            chk(            (a*b)*c,   120, "i");
+            chk(        (a*b)*(c*4),   480, "j");
+            chk(             a*(-1),    -5, "k");
+            chk(            -a*(-1),     5, "l");
+            chk(               -a*2,   -10, "m");
+            chk(            -a*(-2),    10, "n");
+            chk(               -a*4,   -20, "o");
+            chk(            -a*(-4),    20, "p");
+            chk(             -a*256, -1280, "q");
+            chk(          -a*(-256),  1280, "r");
+            fill("s");
+            newl();
+
+            chk(                3*a,    15, "a");
+            chk(                a*b,    60, "b");
+            chk(              a*b*c,   120, "c");
+            chk(               12*6,    72, "d");
+            chk(                a*3,    15, "e");
+            chk(            3*(a*b),   180, "f");
+            chk(            (a*b)*3,   180, "g");
+            chk(            a*(b*c),   120, "h");
+            chk(            (a*b)*c,   120, "i");
+            chk(        (a*b)*(c*4),   480, "j");
+            chk(                0*a,     0, "k");
+            chk(                1*a,     5, "l");
+            chk(                2*a,    10, "m");
+            chk(                3*a,    15, "n");
+            chk(                4*a,    20, "o");
+            chk(                5*a,    25, "p");
+            chk(                6*a,    30, "q");
+            chk(                7*a,    35, "r");
+            chk(                8*a,    40, "s");
+            chk(                a*0,     0, "t");
+            chk(                a*1,     5, "u");
+            chk(                a*2,    10, "v");
+            chk(                a*3,    15, "w");
+            chk(                a*4,    20, "x");
+            chk(                a*5,    25, "y");
+            chk(                a*6,    30, "z");
+            chk(                a*7,    35, "0");
+            chk(                a*8,    40, "1");
+            chk(              a*256,  1280, "2");
+            chk(            a*65536,327680, "3");
+            chk(      a*16777216, 83886080, "4");
+            chk(               13*0,     0, "5");
+            fill("6");
+            newl();
+
+            chk(              a / 3,     1, "a");
+            chk(              b / a,     2, "b");
+            chk(        b / (a / 2),     6, "c");
+            chk(           XX() / 3,   333, "d");
+            chk(        1000 / XX(),     1, "e");
+            chk(     mod(XX(), 888),   111, "f");
+            chk(    mod(1002, XX()),     3, "g");
+            chk(           XX() / a,   199, "h");
+            chk(       mod(XX(), a),     4, "i");
+            chk(          (a+b) / 3,     5, "j");
+            chk(        mod(a+b, 3),     2, "k");
+            chk(          (a+b) / a,     3, "l");
+            chk(        mod(a+b, a),     2, "m");
+            chk(      (a+b) / (a-2),     5, "n");
+            chk(      mod(a+b, a-2),     2, "o");
+
+            let 
+                var d: int := 100
+                var e: int := 0
+            in  
+                a := 200;
+                chk(          d / 4,    25, "p");
+                chk(          a / 8,    25, "q");
+                chk(     mod(d, 16),     4, "r");
+                chk(    mod(a, 128),    72, "s");
+                chk(    (a+d) / 128,     2, "t");
+                chk(  mod(a+d, 128),    44, "u");
+                chk(          a / 1,     a, "v");
+                chk(          d / 1,     d, "w");
+                chk(      mod(a, 1),     0, "x");
+                chk(      mod(d, 1),     0, "y");
+                a := -32;
+                d := -1025;
+                chk(          a / 4,    -8, "z");
+                chk(          d / 8,  -128, "0");
+                a := 8;
+                chk(          d / a,  -128, "1");
+                a := -32;
+                chk(          a * 4,  -128, "2")
+            end;
+            fill("3");
+            newl();
+
+            a := 100;
+            chk(              a / 1,   100, "a");
+            chk(              a / 2,    50, "b");
+            chk(              a / 3,    33, "c");
+            chk(              a / 4,    25, "d");
+            chk(              a / 5,    20, "e");
+            chk(              a / 6,    16, "f");
+            chk(              a / 7,    14, "g");
+            chk(              a / 8,    12, "h");
+            a := 83886080;
+            chk(            a / 256,327680, "i");
+            chk(          a / 65536,  1280, "j");
+            chk(       a / 16777216,     5, "k");
+            a := 101;
+            chk(          mod(a, 1),     0, "l");
+            chk(          mod(a, 2),     1, "m");
+            chk(          mod(a, 3),     2, "n");
+            chk(          mod(a, 4),     1, "o");
+            chk(          mod(a, 5),     1, "p");
+            chk(          mod(a, 6),     5, "q");
+            chk(          mod(a, 7),     3, "r");
+            chk(          mod(a, 8),     5, "s");
+            a := 16777217;
+            chk(        mod(a, 256),     1, "t");
+            chk(      mod(a, 65536),     1, "u");
+            chk(   mod(a, 16777216),     1, "v");
+            fill("w");
+            newl();
+
+            a := 100;
+            chk(             a / -1,  -100, "a");
+            chk(             a / -2,   -50, "b");
+            chk(             a / -3,   -33, "c");
+            chk(             a / -4,   -25, "d");
+            chk(             a / -5,   -20, "e");
+            chk(             a / -6,   -16, "f");
+            chk(             a / -7,   -14, "g");
+            chk(             a / -8,   -12, "h");
+            a := 83886080;
+            chk(          a / -256,-327680, "i");
+            chk(        a / -65536,  -1280, "j");
+            chk(     a / -16777216,     -5, "k");
+            a := 101;
+            chk(         mod(a, -1),     0, "l");
+            chk(         mod(a, -2),    -1, "m");
+            chk(         mod(a, -3),    -1, "n");
+            chk(         mod(a, -4),    -3, "o");
+            chk(         mod(a, -5),    -4, "p");
+            chk(         mod(a, -6),    -1, "q");
+            chk(         mod(a, -7),    -4, "r");
+            chk(         mod(a, -8),    -3, "s");
+            a := 16777217;
+            chk(       mod(a, -256),  -255, "t");
+            chk(     mod(a, -65536),-65535, "u");
+            chk(mod(a,-16777216),-16777215, "v");
+
+            chk( mod(-a, -16777216),    -1, "w");
+            chk(    mod(-a, -65536),    -1, "x");
+            a := 101;
+            chk(        mod(-a, -8),    -5, "y");
+            chk(        mod(-a, -1),     0, "z");
+            a := 83886080;
+            chk(          -a / -256,327680, "0");
+            chk(        -a / -65536,  1280, "1");
+            chk(     -a / -16777216,     5, "2");
+            a := 100;
+            chk(            -a / -8,    12, "3");
+            chk(            -a / -2,    50, "4");
+            chk(            -a / -1,   100, "5");
+            fill("6"); newl()
+        end
+in
+    TstArith()
+end

@@ -1,0 +1,6 @@
+/* tests longer strings */
+let
+	var x := "Hej, Peter er en fisk!"	
+in
+	print(x)
+end

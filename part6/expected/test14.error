@@ -1,0 +1,4 @@
+../testcases/test14.tig:9.12:Operator used on incompatible types: RECORD
+  name: STRING
+  id: INT
+END, ARRAY of INT

@@ -1,0 +1,9 @@
+let
+	var text := "This is test 3"
+in
+	/* Lets enter an infinite loop. */
+	while 1 > 0
+		do (if (size(text) < 42)
+			then text:= concat(text, text) /* This will be awesome! */
+			else text:= substring(text, 0, 13))
+end

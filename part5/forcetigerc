@@ -1,0 +1,39 @@
+#!/bin/bash --norc
+
+binary=tigerc.x86-linux
+
+lexer=tiger.lex.sml
+parsersig=tiger.grm.sig
+parser=tiger.grm.sml
+
+rlexer=rescue-$lexer
+rparsersig=rescue-$parsersig
+rparser=rescue-$parser
+
+id='>>> This is rescue-tiger.lex.sml <<<'
+
+if strings $binary | grep "$id" >/dev/null; then
+    isRescue="yes"; unset isGenerated
+else
+    isGenerated="yes"; unset isRescue
+fi
+
+case $1 in
+    (generated)
+        if [ "$isRescue" = "yes" ]; then
+            echo "Removing compiler using rescue lexer"
+            chmod u+w $binary $lexer $parsersig $parser
+            rm -f $binary $lexer $parsersig $parser
+        fi;;
+    (rescue)
+        if [ "$isGenerated" = "yes" ]; then
+            echo "Removing compiler not using rescue lexer"
+            chmod u+w $binary $lexer $parsersig $parser
+            rm -f $binary $lexer $parsersig $parser
+            cp $rlexer $lexer
+            cp $rparsersig $parsersig
+            cp $rparser $parser
+            touch $lexer $parsersig $parser
+        fi;;
+esac
+

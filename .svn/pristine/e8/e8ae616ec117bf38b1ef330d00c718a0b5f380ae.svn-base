@@ -1,0 +1,12 @@
+let
+	/******* \a \b \c \d \e \f \g \h \i \j \k 
+	~
+	
+	!"#¤%&/()=?`~@£$€{[]}| ******/
+	
+	function test(number: int) =
+		if (number <> 42) 
+			then print("Wrong number!")
+in
+	test(1)
+end

@@ -1,0 +1,11 @@
+/* define a recursive function; test04 with chk & output */
+let
+    /* calculate n! */
+    function nfactor(n: int): int =
+        if n = 0 then 1 else n * nfactor(n-1)
+in
+    if (nfactor(10) = 3628800)
+    then print("SUCCESS")
+    else print("FAIL")
+end
+

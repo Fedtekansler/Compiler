@@ -1,0 +1,13 @@
+#!/bin/bash --norc
+
+# very naive script: must run from source directory, 
+# expects Tiger source in $TEST_DIR
+
+TEST_DIR=../testcases
+
+if [ "$#" -ne "1" ]; then
+    echo "Usage: $0 <testname>"
+fi
+
+sml @SMLload=tigerc.x86-linux "$TEST_DIR/$1.tig"
+

@@ -1,0 +1,52 @@
+#!/bin/bash --norc
+
+# very naive script: run from this directory and provide the path
+# to the location of the input; it will then put the output locally 
+
+ROOT_DIR=$1
+IN_DIR=$ROOT_DIR/expected
+OUT_DIR=./out
+
+function usage {
+    echo    ""
+    echo    "Usage: $0 <rootdir> <test>"
+    echo    "   where <rootdir> is the path to the compiler directory"
+    echo -n "   and <test> is the name of "
+    echo    "the test, without path and extension"
+    echo    ""
+    exit 1
+}
+
+if [ ! -e "$OUT_DIR" ]; then
+    mkdir "$OUT_DIR"
+fi
+
+if [ "$#" -eq "2" ]; then
+    ROOT_DIR=$1
+    INFILE=$IN_DIR/$2.frag
+    OUTFILE=$OUT_DIR/$2.s
+
+    if [ ! -e $INFILE ]; then
+        echo "Error - no such file: $INFILE"
+        exit 1
+    fi
+
+    sml @SMLload=tigerir.x86-linux $INFILE $OUTFILE
+    
+    if [ "$?" -ne 0 ]; then
+        exit $?
+    fi
+    
+    pushd $OUT_DIR >/dev/null
+    as -g -o $2.o $2.s
+    gcc -g -static -o $2.bin ../runtime.o $2.o
+    popd >/dev/null
+
+    echo "--- Executing $2 ---"
+    $OUT_DIR/$2.bin
+
+else
+    usage
+fi
+
+
